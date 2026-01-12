@@ -2,9 +2,9 @@
 import React from 'react';
 import { 
   PieChart, Pie, Cell, ResponsiveContainer, Tooltip, 
-  BarChart, Bar, XAxis, YAxis, CartesianGrid, Legend 
+  BarChart, Bar, XAxis, YAxis, CartesianGrid 
 } from 'recharts';
-import { Transaction, TransactionType } from '../types';
+import { Transaction, TransactionType, Category } from '../types';
 import { CATEGORY_COLORS } from '../constants';
 
 interface Props {
@@ -74,7 +74,11 @@ const Charts: React.FC<Props> = ({ transactions }) => {
                 stroke="none"
               >
                 {expenseData.map((entry, index) => (
-                  <Cell key={`cell-${index}`} fill={CATEGORY_COLORS[entry.name as any]} className="hover:opacity-80 transition-opacity cursor-pointer focus:outline-none" />
+                  <Cell 
+                    key={`cell-${index}`} 
+                    fill={CATEGORY_COLORS[entry.name as Category] || '#94a3b8'} 
+                    className="hover:opacity-80 transition-opacity cursor-pointer focus:outline-none" 
+                  />
                 ))}
               </Pie>
               <Tooltip content={<CustomTooltip />} />
