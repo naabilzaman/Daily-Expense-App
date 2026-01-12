@@ -422,8 +422,8 @@ const App: React.FC = () => {
 
       {/* Dashboard Main Content */}
       <main className="max-w-7xl mx-auto px-6 sm:px-10 py-10">
-        {/* Personalized Welcome Message */}
-        <div className="mb-10 text-center md:text-left">
+        {/* Personalized Welcome Message - Optimized for Centering on Mobile */}
+        <div className="mb-10 flex flex-col items-center md:items-start text-center md:text-left">
           <h2 className="text-3xl sm:text-4xl font-black text-slate-900 dark:text-white tracking-tight">
             Welcome back, {user.name.split(' ')[0]}!
           </h2>
