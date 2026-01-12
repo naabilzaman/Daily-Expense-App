@@ -1,0 +1,7 @@
+{
+  "name": "Copy of Smart Expense Pro",
+  "description": "A visually stunning, AI-powered financial management dashboard with real-time analytics, Excel exports, and Google Drive integration.",
+  "requestFramePermissions": [
+    "camera"
+  ]
+}
