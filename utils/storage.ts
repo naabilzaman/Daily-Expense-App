@@ -15,9 +15,10 @@ export const storage = {
   },
   getUser: (): User | null => {
     const data = localStorage.getItem(STORAGE_KEY_USER);
-    return data ? JSON.parse(data) : null;
+    if (!data || data === 'null') return null;
+    return JSON.parse(data);
   },
-  setUser: (user: User) => {
+  setUser: (user: User | null) => {
     localStorage.setItem(STORAGE_KEY_USER, JSON.stringify(user));
   },
   getAccounts: (): User[] => {
@@ -33,6 +34,15 @@ export const storage = {
       accounts.push(user);
     }
     localStorage.setItem(STORAGE_KEY_ACCOUNTS, JSON.stringify(accounts));
+  },
+  exportFullData: () => {
+    return {
+      transactions: storage.getTransactions(),
+      accounts: storage.getAccounts(),
+      currentUser: storage.getUser(),
+      exportDate: new Date().toISOString(),
+      version: "1.1.0"
+    };
   },
   clearAll: () => {
     localStorage.removeItem(STORAGE_KEY_TRANSACTIONS);
