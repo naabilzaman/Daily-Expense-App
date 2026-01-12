@@ -23,12 +23,16 @@ export interface Transaction {
   type: TransactionType;
   category: Category;
   date: string;
+  createdAt: string;
   note: string;
 }
 
 export interface User {
   name: string;
+  username: string;
   email: string;
+  password?: string;
+  avatarUrl?: string;
 }
 
 export interface FinancialStats {
