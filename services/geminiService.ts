@@ -1,11 +1,15 @@
-
 import { GoogleGenAI } from "@google/genai";
 import { Transaction, FinancialStats } from "../types";
 
-const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
-
 export async function getFinancialTips(transactions: Transaction[], stats: FinancialStats) {
+  const apiKey = process.env.API_KEY;
+  
+  if (!apiKey || apiKey === 'undefined' || apiKey === '') {
+    return "AI Advisor is offline. Please configure your API_KEY in settings to unlock insights.";
+  }
+
   try {
+    const ai = new GoogleGenAI({ apiKey });
     const recentTransactions = transactions.slice(0, 5).map(t => `${t.date}: ${t.type} of $${t.amount} in ${t.category}`).join(', ');
     
     const prompt = `
@@ -32,6 +36,6 @@ export async function getFinancialTips(transactions: Transaction[], stats: Finan
     return response.text || "Keep tracking your expenses to see detailed AI insights here!";
   } catch (error) {
     console.error("Gemini Error:", error);
-    return "Start adding transactions to get AI-powered financial advice.";
+    return "An error occurred while connecting to the AI. Check your network or API key.";
   }
 }
